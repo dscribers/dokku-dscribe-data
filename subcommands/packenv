@@ -12,5 +12,7 @@ if [ -z "$APP_NAME" ]; then
 fi
 
 touch $DOKKU_HOME/$APP_NAME/.packenv
+touch $DOKKU_HOME/$APP_NAME-staging/.packenv
+touch $DOKKU_HOME/$APP_NAME-sprint/.packenv
 
 dokku_log_info1_quiet $APP_NAME would pack env vars before building
