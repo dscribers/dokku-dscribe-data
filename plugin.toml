@@ -1,4 +1,4 @@
 [plugin]
 description = "Reduce app creation commands to just one"
-version = "0.1.1"
+version = "0.2.0"
 [plugin.config]
