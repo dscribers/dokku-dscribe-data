@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
 
 APP_NAME="$1"; fn-verify-app-name "$APP_NAME"
 

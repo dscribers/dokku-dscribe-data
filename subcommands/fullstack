@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+source "$PLUGIN_AVAILABLE_PATH/dscribe/subcommands/frontend"
+source "$PLUGIN_AVAILABLE_PATH/dscribe/subcommands/api"
