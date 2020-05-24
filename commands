@@ -7,7 +7,7 @@ set -eo pipefail
 
 case "$1" in
   help | dscribe:help)
-    cmd-plugin-help "$@"
+    cmd-dscribe-help "$@"
     ;;
 
   *)

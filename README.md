@@ -16,8 +16,11 @@ sudo dokku plugin:install https://github.com/dscribers/dokku-dscribe.git dscribe
 ## Usage
 
 ```bash
-dokku dscribe:buildenv APP_NAME # Packs all env vars into .env file before building the app.
+dokku dscribe:packenv APP_NAME # Packs all env vars into .env file before building the app.
 ```
+
+> **Note**: All apps created with `dscribe:create`, `dscribe:api` and `dscribe:fullstack`
+> have this enabled for them by default.
 
 ### Slack urls
 
