@@ -6,6 +6,6 @@ APP_NAME=$2
 
 fn-verify-app-name "$APP_NAME"
 
-dokku app:destroy "$APP_NAME"
-dokku app:destroy "$APP_NAME-staging"
-dokku app:destroy "$APP_NAME-sprint"
+dokku apps:destroy "$APP_NAME"
+dokku apps:destroy "$APP_NAME-staging"
+dokku apps:destroy "$APP_NAME-sprint"

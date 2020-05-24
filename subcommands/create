@@ -6,6 +6,6 @@ APP_NAME=$2
 
 fn-has-app-name "$APP_NAME"
 
-dokku app:create "$APP_NAME"
-dokku app:create "$APP_NAME-staging"
-dokku app:create "$APP_NAME-sprint"
+dokku apps:create "$APP_NAME"
+dokku apps:create "$APP_NAME-staging"
+dokku apps:create "$APP_NAME-sprint"
