@@ -4,6 +4,9 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
 
 APP="$1"; verify_app_name "$APP"
+
+test -f "$DOKKU_ROOT/$APP/.packenv" && dokku_log_info1_quiet Creating .env file || dokku_log_exit_quiet Not creating .env file
+
 TMP_WORK_DIR="$2"
 ENV_FILE="$DOKKU_ROOT/$APP/ENV"
 TARGET_FILE="$TMP_WORK_DIR/.env"

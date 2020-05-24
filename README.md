@@ -15,12 +15,14 @@ sudo dokku plugin:install https://github.com/dscribers/dokku-dscribe.git dscribe
 
 ## Usage
 
+### Create .env file before build
+
 ```bash
 dokku dscribe:packenv APP_NAME # Packs all env vars into .env file before building the app.
 ```
 
-> **Note**: All apps created with `dscribe:create`, `dscribe:api` and `dscribe:fullstack`
-> have this enabled for them by default.
+> **Note**: All apps created with `dscribe:create`, `dscribe:frontend`, `dscribe:api`
+> and `dscribe:fullstack` have this enabled for them by default.
 
 ### Slack urls
 
@@ -48,6 +50,19 @@ dokku app:create APP_NAME-sprint # creates sprint app
 dokku slack:set APP_NAME prod_url # Sets the slack notification url for production, if available
 dokku slack:set APP_NAME-staging staging_url # Sets the slack notification url for staging, if available
 dokku slack:set APP_NAME-sprint sprint_url # Sets the slack notification url for sprint, if available
+```
+
+### Create a frontend app
+
+```bash
+dokku dscribe:frontend APP_NAME
+```
+
+This runs the following code:
+
+```bash
+dokku dscribe:create APP_NAME
+dokku dscribe:packenv APP_NAME
 ```
 
 ### Create an API app
@@ -82,4 +97,4 @@ dokku slack:set APP_NAMEapi-sprint sprint_url # Sets the slack notification url 
 dokku dscribe:fullstack APP_NAME
 ```
 
-> This runs commands in `dscribe:create` and `dscribe:api`.
+> This runs commands in `dscribe:frontend` and `dscribe:api`.

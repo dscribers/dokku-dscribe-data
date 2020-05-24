@@ -27,9 +27,9 @@ help_desc
 fn-help-content() {
   declare desc="return help content"
   cat <<help_content
-    dscribe:api <app> Creates production, staging and sprint api apps
-    dscribe:create <app> Creates production, staging and sprint apps
-    dscribe:fullstack <app> Creates production, staging and sprint normal and api apps
+    dscribe:api <app> Creates production staging and sprint api apps
+    dscribe:create <app> Creates production staging and sprint apps
+    dscribe:fullstack <app> Creates production staging and sprint normal and api apps
     dscribe:packenv <app> Packs all env vars into .env file before building the app
     dscribe:slack [<type>] [<url>] Shows/Sets notification urls for all/given types
 help_content

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
+
+APP_NAME=$2
+
+
+if [ -z "$APP_NAME" ]; then
+    dokku_log_fail_quiet Specify app name
+    exit 1;
+fi
+
+touch $DOKKU_HOME/$APP_NAME/.packenv
+
+dokku_log_info1_quiet $APP_NAME would pack env vars before building
