@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+cmd-dscribe-help() {
+  declare desc="help command"
+  declare CMD="$1"
+  local plugin_name="dscribe"
+  local plugin_description="Shortcut for apps management"
+
+  if [[ "$CMD" == "$plugin_name:help" ]]; then
+    echo -e "Usage: dokku $plugin_name[:COMMAND]"
+    echo ''
+    echo "$plugin_description"
+    echo ''
+    echo 'Additional commands:'
+    fn-help-content | sort | column -c2 -t -s,
+  elif [[ $(ps -o command= $PPID) == *"--all"* ]]; then
+    fn-help-content
+  else
+    cat <<help_desc
+    $plugin_name, $plugin_description
+help_desc
+  fi
+}
+
+fn-help-content() {
+  declare desc="return help content"
+  cat <<help_content
+    dscribe:api <app> Creates production, staging and sprint api apps
+    dscribe:create <app> Creates production, staging and sprint apps
+    dscribe:fullstack <app> Creates production, staging and sprint normal and api apps
+    dscribe:packenv <app> Packs all env vars into .env file before building the app
+    dscribe:slack [<type>] [<url>] Shows/Sets notification urls for all/given types
+help_content
+}

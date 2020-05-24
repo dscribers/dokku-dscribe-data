@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+[[ " help dscribe:help " == *" $1 "* ]] || exit "$DOKKU_NOT_IMPLEMENTED_EXIT"
+source "$PLUGIN_AVAILABLE_PATH/dscribe/help-functions"
+set -eo pipefail
+[[ $DOKKU_TRACE ]] && set -x
+
+case "$1" in
+  help | dscribe:help)
+    cmd-plugin-help "$@"
+    ;;
+
+  *)
+    exit "$DOKKU_NOT_IMPLEMENTED_EXIT"
+    ;;
+
+esac

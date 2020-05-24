@@ -1,2 +1,82 @@
 # dokku-dscribe
+
 A dokku plugin to reduce app creation commands to just one.
+
+## Requirements
+
+- dokku v0.20.x+
+- docker 19.03.+
+
+## Installation
+
+```bash
+sudo dokku plugin:install https://github.com/dscribers/dokku-dscribe.git dscribe
+```
+
+## Usage
+
+```bash
+dokku dscribe:buildenv APP_NAME # Packs all env vars into .env file before building the app.
+```
+
+### Slack urls
+
+```bash
+dokku dscribe:slack # Shows notification urls for all types
+dokku dscribe:slack TYPE # Shows the notification url for the given type
+dokku dscribe:slack TYPE URL # Sets the notification url for the given type
+```
+
+> **Note**: `TYPE` can only be one of `prod`, `staging` and `sprint`.
+
+### Create an app
+
+```bash
+dokku dscribe:create APP_NAME
+```
+
+This runs the following code:
+
+```bash
+dokku app:create APP_NAME # creates production app
+dokku app:create APP_NAME-staging # creates staging app
+dokku app:create APP_NAME-sprint # creates sprint app
+
+dokku slack:set APP_NAME prod_url # Sets the slack notification url for production, if available
+dokku slack:set APP_NAME-staging staging_url # Sets the slack notification url for staging, if available
+dokku slack:set APP_NAME-sprint sprint_url # Sets the slack notification url for sprint, if available
+```
+
+### Create an API app
+
+```bash
+dokku dscribe:api APP_NAME
+```
+
+This runs the following code:
+
+```bash
+dokku app:create APP_NAMEapi # creates production api app
+dokku postgres:create APP_NAMEdb # creates postgres production database
+dokku postgres:link APP_NAMEdb APP_NAMEapi # connects production api app and database
+
+dokku app:create APP_NAMEapi-staging # creates staging api app
+dokku postgres:create APP_NAMEdb-staging # creates postgres staging database
+dokku postgres:link APP_NAMEdb-staging APP_NAMEapi-staging # connects staging api app and database
+
+dokku app:create APP_NAMEapi-sprint # creates sprint api app
+dokku postgres:create APP_NAMEdb-sprint # creates postgres sprint database
+dokku postgres:link APP_NAMEdb-sprint APP_NAMEapi-sprint # connects sprint api app and database
+
+dokku slack:set APP_NAMEapi prod_url # Sets the slack notification url for production, if available
+dokku slack:set APP_NAMEapi-staging sprint_url # Sets the slack notification url for staging, if available
+dokku slack:set APP_NAMEapi-sprint sprint_url # Sets the slack notification url for sprint, if available
+```
+
+### Create a fullstack app
+
+```bash
+dokku dscribe:fullstack APP_NAME
+```
+
+> This runs commands in `dscribe:create` and `dscribe:api`.
