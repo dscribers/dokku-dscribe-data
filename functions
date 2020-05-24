@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
 
 cmd-dscribe-help() {
   declare desc="help command"
@@ -29,8 +30,18 @@ fn-help-content() {
   cat <<help_content
     dscribe:api <app> Creates production staging and sprint api apps
     dscribe:create <app> Creates production staging and sprint apps
+    dscribe:destroy <app> Destroys production staging and sprint apps
     dscribe:fullstack <app> Creates production staging and sprint normal and api apps
     dscribe:packenv <app> Packs all env vars into .env file before building the app
     dscribe:slack [<type>] [<url>] Shows/Sets notification urls for all/given types
 help_content
+}
+
+fn-verify-app-name() {
+  if [ -z "$1" ]; then
+      dokku_log_fail_quiet Specify app name
+      exit 1;
+  fi
+
+  verify_app_name "$1"
 }

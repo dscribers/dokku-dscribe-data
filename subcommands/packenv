@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 
-set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
-source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
 
 APP_NAME=$2
 
-
-if [ -z "$APP_NAME" ]; then
-    dokku_log_fail_quiet Specify app name
-    exit 1;
-fi
+fn-verify-app-name "$APP_NAME"
 
 touch $DOKKU_ROOT/$APP_NAME/.packenv 2>/dev/null
 touch $DOKKU_ROOT/$APP_NAME-staging/.packenv 2>/dev/null

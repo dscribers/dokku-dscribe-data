@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
+
+APP_NAME=$2
+
+fn-verify-app-name "$APP_NAME"
+
+dokku app:create "$APP_NAME"
+dokku app:create "$APP_NAME-staging"
+dokku app:create "$APP_NAME-sprint"

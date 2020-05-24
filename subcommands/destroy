@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
+
+APP_NAME=$2
+
+fn-verify-app-name "$APP_NAME"
+
+dokku app:destroy "$APP_NAME"
+dokku app:destroy "$APP_NAME-staging"
+dokku app:destroy "$APP_NAME-sprint"
