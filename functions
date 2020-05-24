@@ -37,11 +37,14 @@ fn-help-content() {
 help_content
 }
 
-fn-verify-app-name() {
+fn-has-app-name() {
   if [ -z "$1" ]; then
       dokku_log_fail_quiet Specify app name
       exit 1;
   fi
+}
 
+fn-verify-app-name() {
+  fn-has-app-name "$1"
   verify_app_name "$1"
 }
