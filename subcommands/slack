@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
+
+PROD_FILE="$DOKKU_ROOT/.dscribe-prod-slack-url"
+STAGING_FILE="$DOKKU_ROOT/.dscribe-staging-slack-url"
+SPRINT_FILE="$DOKKU_ROOT/.dscribe-sprint-slack-url"
+
+touch $PROD_FILE
+touch $STAGING_FILE
+touch $SPRINT_FILE
+
+TYPE=$2
+URL=$3
+
+fn-throw-error () {
+    echo Unknown type. Accepted types include 'prod', 'staging' and 'sprint'
+    exit 1
+}
+
+fn-get-type () {
+    case "$1" in
+        "prod") local url=`cat "$PROD_FILE"` ;;
+        "staging") local url=`cat "$STAGING_FILE"` ;;
+        "sprint") local url=`cat "$SPRINT_FILE"` ;;
+        *) fn-throw-error ;;
+    esac
+
+    echo "$1: $url"
+}
+
+fn-set-type () {
+    case "$1" in
+        "prod") echo "$2" > "$PROD_FILE" ;;
+        "staging") echo "$2" > "$STAGING_FILE" ;;
+        "sprint") echo "$2" > "$SPRINT_FILE" ;;
+        *) fn-throw-error ;;
+    esac
+
+    fn-get-type $1
+}
+
+if [ -z "$TYPE" ]; then
+    fn-get-type prod
+    fn-get-type staging
+    fn-get-type sprint
+else
+    test -z "$URL" && fn-get-type $TYPE || fn-set-type $TYPE $URL
+fi

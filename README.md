@@ -112,3 +112,8 @@ dokku apps:destroy APP_NAME
 dokku apps:destroy APP_NAME-staging
 dokku apps:destroy APP_NAME-sprint
 ```
+
+## Letsencrypt
+
+This plugin checks that the application has https enabled at each release.
+If not, it enables https for it.

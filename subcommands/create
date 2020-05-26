@@ -9,3 +9,12 @@ fn-has-app-name "$APP_NAME"
 dokku apps:create "$APP_NAME"
 dokku apps:create "$APP_NAME-staging"
 dokku apps:create "$APP_NAME-sprint"
+
+slackurl=`dokku dscribe:slack prod`
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}" "$slackurl"
+
+slackurl=`dokku dscribe:slack staging`
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}-staging" "$slackurl"
+
+slackurl=`dokku dscribe:slack sprint`
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}-sprint" "$slackurl"

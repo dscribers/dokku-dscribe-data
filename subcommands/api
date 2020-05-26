@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+source "$PLUGIN_AVAILABLE_PATH/dscribe/functions"
+
+APP_NAME=$2
+
+fn-has-app-name "$APP_NAME"
+
+dokku apps:create "${APP_NAME}api"
+dokku postgres:create "${APP_NAME}db"
+dokku postgres:link "${APP_NAME}db" "${APP_NAME}api"
+
+dokku apps:create "${APP_NAME}api-staging"
+dokku postgres:create "${APP_NAME}db-staging"
+dokku postgres:link "${APP_NAME}db-staging" "${APP_NAME}api-staging"
+
+dokku apps:create "${APP_NAME}api-sprint"
+dokku postgres:create "${APP_NAME}db-sprint"
+dokku postgres:link "${APP_NAME}db-sprint" "${APP_NAME}api-sprint"
+
+slackurl=`dokku dscribe:slack prod`
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}api" "$slackurl"
+
+slackurl=`dokku dscribe:slack sprint`
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}api-staging" "$slackurl"
+test ! -z "$slackurl" && dokku slack:set "${APP_NAME}api-sprint" "$slackurl"

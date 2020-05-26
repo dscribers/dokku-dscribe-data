@@ -37,11 +37,15 @@ fn-help-content() {
 help_content
 }
 
-fn-has-app-name() {
+fn-var-exists() {
   if [ -z "$1" ]; then
-      dokku_log_fail_quiet Specify app name
+      dokku_log_fail_quiet "$2"
       exit 1;
   fi
+}
+
+fn-has-app-name() {
+  fn-var-exists "$1" "Specify app name"
 }
 
 fn-verify-app-name() {
