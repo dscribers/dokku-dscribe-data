@@ -6,6 +6,5 @@ APP_NAME=$2
 
 fn-verify-app-name "$APP_NAME"
 
-dokku apps:destroy "$APP_NAME"
-dokku apps:destroy "$APP_NAME-staging"
-dokku apps:destroy "$APP_NAME-sprint"
+dokku postgres:destroy "$APP_NAME"
+dokku redis:destroy "$APP_NAME"

@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-source "$PLUGIN_AVAILABLE_PATH/dscribe/subcommands/create"
-source "$PLUGIN_AVAILABLE_PATH/dscribe/subcommands/packenv"
